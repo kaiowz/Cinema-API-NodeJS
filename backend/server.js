@@ -6,6 +6,7 @@ const database = require("./database");
 const server = express();
 
 server.use(express.json());
+server.use(express.urlencoded({extended: false}));
 
 //ROTAS
 const router = require("./apiRoutes");
