@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const modelSchema = new mongoose.Schema({
     title: String,
-    poster: Buffer,
+    poster_url: String,
     duration: Number,
     director: String,
     synopsis: String,
@@ -11,7 +11,7 @@ const modelSchema = new mongoose.Schema({
     trailer_url: String,
 });
 
-const modelName = "Filmes"
+const modelName = "Movies"
 
 if (mongoose.connection && mongoose.connection.models[modelName]){
     module.exports = mongoose.connection.models[modelName];
