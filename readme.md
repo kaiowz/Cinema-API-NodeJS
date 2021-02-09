@@ -15,7 +15,56 @@ N/A
 #### Responses
 ##### Json text with Error and Result fields. The result field can have other two arrays as Active and Inactive, that reflects in "In theaters" and "Coming soon" movies.
 ```
-
+{
+  "error": [],
+  "result": [
+    {
+      "active": [
+        {
+          "genre": [
+            "Action",
+            "Fantasy"
+          ],
+          "_id": "60230bda1c210242ec07f40b",
+          "title": "Monster Hunter",
+          "poster_url": "image url",
+          "director": "Paul W.S. Anderson",
+          "duration": 104,
+          "synopsis": "Parallel to our world, there is another: a world of powerful and dangerous monsters that control their territories with deadly ferocity. When Lieutenant Artemis (Milla Jovovich) and her elite squadron are transported through a portal that connects the two worlds, they will be faced with the most shocking experience of their lives. In her desperate attempt to return home, the brave lieutenant encounters a mysterious hunter (Tony Jaa), whose unique skills have enabled him to survive in this hostile land. Facing the monsters' tireless and terrifying attacks, the two warriors unite to fight against them and find a way to return home. Baseado no fenômeno global dos video-games, MONSTER HUNTER.",
+          "state": 1,
+          "trailer_url": "trailer url",
+          "release_date": "2021/02/18",
+          "distribuitor": "Sony",
+          "restriction_age": 14,
+          "__v": 0
+        }
+      ]
+    },
+    {
+      "inactive": [
+        {
+          "genre": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+          ],
+          "_id": "602304341c210242ec07f407",
+          "title": "Wonder Woman 1984",
+          "poster_url": "image url",
+          "director": "Patty Jenkis",
+          "duration": 151,
+          "synopsis": "Wonder Woman 1984 accompanies Diana in 1984, during the Cold War, coming into conflict with two great enemies - media entrepreneur Maxwell Lord and enemy friend Barbara Minerva, while reuniting with her love interest Steve Trevor.",
+          "state": 0,
+          "trailer_url": "trailer url",
+          "release_date": "2020/12/16",
+          "distribuitor": "Warner Bros",
+          "restriction_age": 12,
+          "__v": 0
+        }
+      ]
+    }
+  ]
+}
 ```
 
 #### GET /api/movie
