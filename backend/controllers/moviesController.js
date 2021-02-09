@@ -9,13 +9,14 @@ module.exports = new class MoviesController{
                 return res.json(json);
             }
 
-            for(let i in res){
-                if (res[i].state == 1){
-                    json.result.push({ativo:res[i]});
-                }else{
-                    json.result.push({breve:res[i]});
-                }
+            let active = [];
+            let inactive = [];
+
+            for (let i in res){
+                (res[i].state == 0) ? inactive.push(res[i]):active.push(res[i]);
             }
+
+            json.result.push({active: active}, {inactive: inactive});
         }).catch((err)=>{
             json.error.push(err.message);
         });

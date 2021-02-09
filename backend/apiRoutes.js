@@ -15,5 +15,7 @@ router.delete("/api/movie/:_id", MoviesController.delete);
 const SessionController = require("./controllers/sessionsController");
 
 router.post("/api/session", SessionController.create);
+router.put("/api/session/:_id", SessionController.update);
+
 
 module.exports = router;
