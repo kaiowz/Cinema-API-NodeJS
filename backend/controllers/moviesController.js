@@ -1,6 +1,5 @@
 const MoviesModel = require("../models/moviesModel");
-const MoviesValidator = require("../validators/moviesValidators");
-
+const {validationResult, matchedData} = require("express-validator");
 class MoviesController{
     async all(req, res){
         let json = {error: [], result:[]};
@@ -28,11 +27,14 @@ class MoviesController{
 
     async create(req, res){
         let json = {error: [], result:[]};
-
-        json.error = await MoviesValidator.check(req.body);
-        
-        if (json.error.length > 0) {return res.json(json);}
-        let movie = await MoviesModel.create(req.body);
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            json.error.push(errors.mapped());
+            return res.json(json);
+        }
+        const data = matchedData(req);
+        console.log(data);
+        let movie = await MoviesModel.create(data);
         json.result.push(movie);
         res.json(json);
     }

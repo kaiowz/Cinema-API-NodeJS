@@ -1,17 +1,49 @@
-class MovieValidator{
-    async check(movie){
-        const error = [];
-        
-        (!movie.title) ? error.push({title: {msg: "Título inválido"}}):error;
-        (!movie.poster_url) ? error.push({poster_url: {msg: "Poster inválido"}}):error;
-        (!movie.duration) ? error.push({duration: {msg: "Duração inválida"}}):error;
-        (!movie.director) ? error.push({director: {msg: "Diretor inválido"}}):error;
-        (!movie.synopsis) ? error.push({synopsis: {msg: "Sinopse inválida"}}):error;
-        (!movie.genre) ? error.push({genre: {msg: "Gênero inválido"}}):error;
-        (!movie.trailer_url) ? error.push({trailer_url: {msg: "Trailer inválido"}}):error;
+const {checkSchema} = require("express-validator");
 
-        return error;
-    }
+module.exports = {
+    new: checkSchema({
+        title:{
+            trim: true,
+            notEmpty: true,
+            errorMessage: "Invalid title!"
+        },
+        poster_url:{
+            trim: true,
+            notEmpty: true,
+            errorMessage: "Invalid poster url!"
+        },
+        director:{
+            trim: true,
+            notEmpty: true,
+            errorMessage: "Invalid director!"
+        },
+        duration:{
+            trim: true,
+            notEmpty: true,
+            isInt: true,
+            toInt: true,
+            errorMessage: "Invalid duration!"
+        },
+        synopsis:{
+            trim: true,
+            notEmpty: true,
+            errorMessage: "Invalid synopsis!"
+        },
+        state:{
+            trim: true,
+            notEmpty: true,
+            isInt: true,
+            toInt: true,
+            errorMessage: "Invalid state!"
+        },
+        genre:{
+            notEmpty: true,
+            errorMessage: "Invalid genre!"
+        },
+        trailer_url:{
+            trim: true,
+            notEmpty: true,
+            errorMessage: "Invalid trailer url!"
+        },
+    })
 }
-
-module.exports = new MovieValidator();
