@@ -22,7 +22,15 @@ class MoviesController{
     }
 
     async one(req, res){
-
+        let json = {error: [], result:[]};
+        let {_id} = req.params;
+        await MoviesModel.findOne({_id: _id}).then((movie) =>{
+            json.result.push(movie);
+            return res.json(json);
+        }).catch((err)=>{
+            json.error.push(err.message);
+            return res.json(json);
+        });
     }
 
     async create(req, res){
@@ -33,7 +41,6 @@ class MoviesController{
             return res.json(json);
         }
         const data = matchedData(req);
-        console.log(data);
         let movie = await MoviesModel.create(data);
         json.result.push(movie);
         res.json(json);
