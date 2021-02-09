@@ -1,6 +1,6 @@
 # Cinema API
 
-This API was build to simulate the functionality of movie theather web sites.
+This API was build to simulate the functionality of movie theather with movies and sessions.
 
 ### Made with:
 **N**ode Js / **E**xpress / **M**ongoDB
