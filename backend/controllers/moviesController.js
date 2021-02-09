@@ -1,6 +1,6 @@
 const MoviesModel = require("../models/moviesModel");
 const {validationResult, matchedData} = require("express-validator");
-class MoviesController{
+module.exports = new class MoviesController{
     async all(req, res){
         let json = {error: [], result:[]};
         await MoviesModel.find().then((res)=>{
@@ -101,5 +101,3 @@ class MoviesController{
         res.json(json);
     }
 }
-
-module.exports = new MoviesController();
