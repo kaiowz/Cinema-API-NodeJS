@@ -41,7 +41,9 @@ class MoviesController{
             await MoviesModel.find({
                 $or:[
                     {"director": {$regex: search, $options: "i"}},
-                    {"title": {$regex: search, $options: "i"}}
+                    {"title": {$regex: search, $options: "i"}},
+                    {"distribuitor": {$regex: search, $options: "i"}},
+                    {"genre": {$regex: search, $options: "i"}}
                 ]
             }).then((res)=>{
                 json.result.push(res);

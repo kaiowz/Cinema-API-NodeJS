@@ -4,6 +4,8 @@ const modelSchema = new mongoose.Schema({
     title: String,
     poster_url: String,
     duration: Number,
+    distribuitor: String,
+    release_date: Date,
     director: String,
     synopsis: String,
     state: Number, //0 Soon - 1 Active

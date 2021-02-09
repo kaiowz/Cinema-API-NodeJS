@@ -45,5 +45,14 @@ module.exports = {
             notEmpty: true,
             errorMessage: "Invalid trailer url!"
         },
+        release_date:{
+            notEmpty: true,
+            errorMessage: "Invalid release date!"
+        },
+        distribuitor: {
+            notEmpty: true,
+            trim: true,
+            errorMessage: "Invalid distribuitor!"
+        }
     })
 }
