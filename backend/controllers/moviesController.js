@@ -72,6 +72,25 @@ class MoviesController{
         });
         res.json(json);
     }
+
+    async update(req, res){
+        let json = {error: [], result:[]};
+        let {_id} = req.params;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            json.error.push(errors.mapped());
+            return res.json(json);
+        }
+        const data = matchedData(req);
+
+        console.log(_id);
+        await MoviesModel.findByIdAndUpdate(_id, data).then((res)=>{
+            json.result.push(res);
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
+        res.json(json);
+    }
 }
 
 module.exports = new MoviesController();

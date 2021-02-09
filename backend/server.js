@@ -13,5 +13,5 @@ const router = require("./apiRoutes");
 server.use(router);
 
 server.listen(process.env.PORT, ()=>{
-    console.log(`Servidor rodando na porta ${process.env.PORT}`);
+    console.log(`Servidor rodando  http://localhost:${process.env.PORT}`);
 });

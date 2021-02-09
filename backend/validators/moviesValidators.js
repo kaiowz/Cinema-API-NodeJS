@@ -1,7 +1,7 @@
 const {checkSchema} = require("express-validator");
 
 module.exports = {
-    new: checkSchema({
+    newAndEdit: checkSchema({
         title:{
             trim: true,
             notEmpty: true,
@@ -53,6 +53,11 @@ module.exports = {
             notEmpty: true,
             trim: true,
             errorMessage: "Invalid distribuitor!"
+        },
+        restriction_age:{
+            notEmpty: true,
+            isInt: true,
+            errorMessage: "Invalid restriction age!"
         }
     })
 }

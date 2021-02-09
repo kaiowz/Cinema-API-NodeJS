@@ -11,6 +11,7 @@ const modelSchema = new mongoose.Schema({
     state: Number, //0 Soon - 1 Active
     genre: [String],
     trailer_url: String,
+    restriction_age: Number,
 });
 
 const modelName = "Movies"
