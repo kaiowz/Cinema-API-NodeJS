@@ -1,7 +1,10 @@
 const mongoose = require("mongoose");
 
 const modelSchema = new mongoose.Schema({
-    movie: mongoose.Schema.Types.ObjectId,
+    movie: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Movies",
+    },
     session_date: Date
 });
 

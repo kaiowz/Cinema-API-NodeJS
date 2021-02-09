@@ -14,6 +14,8 @@ router.delete("/api/movie/:_id", MoviesController.delete);
 //ROTAS DE SESSÕES
 const SessionController = require("./controllers/sessionsController");
 
+router.get("/api/sessions", SessionController.all);
+router.get("/api/session/:_id", SessionController.one);
 router.post("/api/session", SessionController.create);
 router.put("/api/session/:_id", SessionController.update);
 

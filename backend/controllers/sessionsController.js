@@ -4,6 +4,27 @@ const {validationResult, matchedData} = require("express-validator");
 const ObjectId = require("mongoose").Types.ObjectId;
 
 module.exports = new class SessionController{    
+    async all(req, res){
+        let json = {error:[], result:[]};
+        await SessionsModel.find().populate('movie').then((sessions)=>{
+            json.result.push(sessions);
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
+        res.json(json);
+    }
+
+    async one(req, res){
+        let json = {error:[], result:[]};
+        let {_id} = req.params;
+        await SessionsModel.findOne({_id: _id}).populate('movie').then((sessions)=>{
+            json.result.push(sessions);
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
+        res.json(json);
+    }
+
     async create(req, res){
         let json = {error:[], result:[]};
         let data = req.body;
