@@ -82,9 +82,18 @@ class MoviesController{
             return res.json(json);
         }
         const data = matchedData(req);
-
-        console.log(_id);
         await MoviesModel.findByIdAndUpdate(_id, data).then((res)=>{
+            json.result.push(res);
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
+        res.json(json);
+    }
+
+    async delete(req, res){
+        let json = {error: [], result: []};
+        let {_id} = req.params;
+        await MoviesModel.findByIdAndDelete(_id).then((res)=>{
             json.result.push(res);
         }).catch((err)=>{
             json.error.push(err.message);
