@@ -18,6 +18,7 @@ router.get("/api/sessions", SessionController.all);
 router.get("/api/session/:_id", SessionController.one);
 router.post("/api/session", SessionController.create);
 router.put("/api/session/:_id", SessionController.update);
+router.delete("/api/session/:_id", SessionController.delete);
 
 
 module.exports = router;

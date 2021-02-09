@@ -17,7 +17,7 @@ module.exports = new class SessionController{
     async one(req, res){
         let json = {error:[], result:[]};
         let {_id} = req.params;
-        await SessionsModel.findOne({_id: _id}).populate('movie').then((sessions)=>{
+        await SessionsModel.findOne(_id).populate('movie').then((sessions)=>{
             json.result.push(sessions);
         }).catch((err)=>{
             json.error.push(err.message);
@@ -50,7 +50,7 @@ module.exports = new class SessionController{
         let json = {error:[], result:[]};
         let {_id} = req.params;
         let data = req.body;
-        await SessionsModel.findById({_id: _id}).then(async (session) =>{
+        await SessionsModel.findById(_id).then(async (session) =>{
             await MoviesModel.findById({_id: session.movie}).then((movie)=>{
                 movie.state = 0;
                 movie.save();
@@ -77,7 +77,18 @@ module.exports = new class SessionController{
         res.json(json);
     }
 
-    async inative(req, res){
-
+    async delete(req, res){
+        let json = {error: [], result: []};
+        let {_id} = req.params;
+        await SessionsModel.findByIdAndDelete(_id).then(async (res)=>{
+            await MoviesModel.findById({_id: res.movie}).then((movie)=>{
+                movie.state = 0;
+                movie.save();
+            })
+            json.result.push(res);
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
+        res.json(json);
     }
 }
