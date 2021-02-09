@@ -3,34 +3,56 @@ const {validationResult, matchedData} = require("express-validator");
 class MoviesController{
     async all(req, res){
         let json = {error: [], result:[]};
-
-        let movies = await MoviesModel.find();
-
-        if (movies.length == 0){
-            json.result.push("No movies are stored!")
-            return res.json(json)
-        }
-
-        for(let i in movies){
-            if (movies[i].state == 1){
-                json.result.push({ativo:movies[i]});
-            }else{
-                json.result.push({breve:movies[i]});
+        await MoviesModel.find().then((res)=>{
+            if (res.length == 0){
+                json.result.push("No movies are stored!");
+                return res.json(json);
             }
-        }
-        return res.json(json);
+
+            for(let i in res){
+                if (res[i].state == 1){
+                    json.result.push({ativo:res[i]});
+                }else{
+                    json.result.push({breve:res[i]});
+                }
+            }
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
+
+        res.json(json);
     }
 
     async one(req, res){
         let json = {error: [], result:[]};
         let {_id} = req.params;
-        await MoviesModel.findOne({_id: _id}).then((movie) =>{
-            json.result.push(movie);
-            return res.json(json);
+        await MoviesModel.findOne({_id: _id}).then((res) =>{
+            json.result.push(res);
         }).catch((err)=>{
             json.error.push(err.message);
-            return res.json(json);
         });
+        res.json(json);
+    }
+
+    async search(req, res){
+        let json = {error: [], result: []};
+        let {search} = req.body;
+        if (search){
+            await MoviesModel.find({
+                $or:[
+                    {"director": {$regex: search, $options: "i"}},
+                    {"title": {$regex: search, $options: "i"}}
+                ]
+            }).then((res)=>{
+                json.result.push(res);
+            }).catch((err) =>{
+                json.error.push(err.message);
+            });
+        }else{
+            json.error.push("Invalid search parameter");
+        }
+
+        res.json(json);
     }
 
     async create(req, res){
@@ -41,8 +63,11 @@ class MoviesController{
             return res.json(json);
         }
         const data = matchedData(req);
-        let movie = await MoviesModel.create(data);
-        json.result.push(movie);
+        await MoviesModel.create(data).then((res)=>{
+            json.result.push(res);
+        }).catch((err)=>{
+            json.error.push(err.message);
+        });
         res.json(json);
     }
 }
