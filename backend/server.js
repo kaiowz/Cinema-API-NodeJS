@@ -1,10 +1,12 @@
 require("dotenv").config();
 const express = require("express");
+const cors = reuiqre("cors")
 const database = require("./database");
 
 //CONFIGS
 const server = express();
 
+server.use(cors());
 server.use(express.json());
 server.use(express.urlencoded({extended: false}));
 
