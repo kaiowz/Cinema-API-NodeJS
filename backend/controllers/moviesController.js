@@ -83,6 +83,9 @@ module.exports = new class MoviesController{
             return res.json(json);
         }
         const data = matchedData(req);
+
+        console.log(data);
+
         await MoviesModel.findByIdAndUpdate(_id, data).then((res)=>{
             json.result.push(res);
         }).catch((err)=>{

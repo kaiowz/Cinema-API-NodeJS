@@ -5,7 +5,7 @@ const modelSchema = new mongoose.Schema({
     poster_url: String,
     duration: Number,
     distribuitor: String,
-    release_date: Date,
+    release_date: Date.UTC(),
     director: String,
     synopsis: String,
     state: Number, //0 Soon - 1 Active

@@ -6,9 +6,9 @@ const MoviesValidator = require("./validators/moviesValidator");
 
 router.get("/api/movies", MoviesController.all);
 router.get("/api/movie/:_id", MoviesController.one);
-router.post("/api/movie", MoviesValidator.newAndEdit, MoviesController.create);
+router.post("/api/movie", MoviesValidator.new, MoviesController.create);
 router.post("/api/movies", MoviesController.search);
-router.put("/api/movie/:_id", MoviesValidator.newAndEdit, MoviesController.update);
+router.put("/api/movie/:_id", MoviesValidator.edit, MoviesController.update);
 router.delete("/api/movie/:_id", MoviesController.delete);
 
 //ROTAS DE SESSÕES
